@@ -202,7 +202,7 @@ async function loadBannerAlert() {
       banner.innerHTML = `
         ${icon} ${label} – ${item.title}<br>
         <small>Issued: ${issued.toUTCString()} | 
-        <a href="${item.link}" target="_blank">Full bulletin</a><br>
+        <a href="${item.link}" target="_blank" rel="noopener noreferrer">Full bulletin</a><br>
         Last checked: ${now.toUTCString()} UTC</small>
       `;
     } else {
@@ -380,38 +380,38 @@ setInterval(loadBannerAlert, 5 * 60 * 1000);
         <li>C. SUBTROPICAL SYSTEM SUMMARY: NONE.</li>
       </ul>
       <p>If there is any other detail, then you should investigate further.</p>
-      <p>To open in a new tab, click <a href="https://www.metoc.navy.mil/jtwc/products/abpwweb.txt" target="_blank">[here]</a></p>
+      <p>To open in a new tab, click <a href="https://www.metoc.navy.mil/jtwc/products/abpwweb.txt"  target="_blank" rel="noopener noreferrer">[here]</a></p>
     </div>
 
     <div class="advisory-block">
       <h3>Fiji MetSVC - Marine Weather Bulletin (SW Pacific)</h3>
       <p>EQ - 25&deg;S | 160&deg;E - 120&deg;W</p>
-      <p>To open in a new tab, click <a href="https://www.met.gov.fj/fiji-weather/south-west-pacific-marine-bulletin" target="_blank">[here]</a></p>
+      <p>To open in a new tab, click <a href="https://www.met.gov.fj/fiji-weather/south-west-pacific-marine-bulletin" target="_blank" rel="noopener noreferrer">[here]</a></p>
     </div>
 
     <div class="advisory-block">
       <h3>NZ MetSVC - High Seas Forecast (Sub-Tropic)</h3>
       <p>25&deg;S - 40&deg;S (i.e. S of Fiji AOR)</p>
-      <p>To open in a new tab, click <a href="https://www.metservice.com/marine/high-seas#subtropic-weather-bulletin" target="_blank">[here]</a></p>
+      <p>To open in a new tab, click <a href="https://www.metservice.com/marine/high-seas#subtropic-weather-bulletin" target="_blank" rel="noopener noreferrer">[here]</a></p>
     </div>
 
     <div class="advisory-block">
       <h3>NZ MetSVC - High Seas Forecast (Forties)</h3>
       <p>South of NZ HSF "Sub-Tropic" (South of 40&deg;S)</p>
-      <p>To open in a new tab, click <a href="https://www.metservice.com/marine/high-seas#forties-weather-bulletin" target="_blank">[here]</a></p>
+      <p>To open in a new tab, click <a href="https://www.metservice.com/marine/high-seas#forties-weather-bulletin" target= target="_blank" rel="noopener noreferrer">[here]</a></p>
     </div>
 
     <div class="advisory-block">
       <h3>AUS BoM - High Seas Forecast (East Coast - NORTH)<br>Product Code: IDY10230</h3>
       <p>EQ to 25&deg;S, West of 170&deg;E (i.e. W of Fiji AoR)</p>
-      <p>To open in a new tab, click <a href="https://www.bom.gov.au/qld/forecasts/nehighseas.shtml" target="_blank">[here]</a></p>
-      <p>To open in a new tab showing the Forecast Areas for the AUS BoM High Seas Forecasts, click <a href="https://www.bom.gov.au/marine/maps/images/high_seas_forecast_areas_ant_ice_edge_map_2019.png" target="_blank">[here]</a></p>
+      <p>To open in a new tab, click <a href="https://www.bom.gov.au/qld/forecasts/nehighseas.shtml"  target="_blank" rel="noopener noreferrer">[here]</a></p>
+      <p>To open in a new tab showing the Forecast Areas for the AUS BoM High Seas Forecasts, click <a href="https://www.bom.gov.au/marine/maps/images/high_seas_forecast_areas_ant_ice_edge_map_2019.png"  target="_blank" rel="noopener noreferrer">[here]</a></p>
     </div>
 
     <div class="advisory-block">
       <h3>AUS BoM - High Seas Forecast (East Coast - SOUTH)<br>Product Code: IDY10210</h3>
       <p>25&deg;S - 50&deg;S, West of 160&deg;-170&deg;E (W of NZ HSFs 'SubTropics' &amp; 'Forties')</p>
-      <p>To open link in new tab, click <a href="https://www.bom.gov.au/vic/forecasts/sehighseas.shtml" target="_blank">[here]</a></p>
+      <p>To open link in new tab, click <a href="https://www.bom.gov.au/vic/forecasts/sehighseas.shtml"  target="_blank" rel="noopener noreferrer">[here]</a></p>
     </div>
   </section>
 
@@ -707,7 +707,7 @@ async function loadTsunamiAlerts() {
         <strong>${icon} ${item.title}</strong> <em>(${label})</em><br>
         <small>Issued: ${new Date(item.pubDate).toUTCString()}</small><br>
         <p>${desc}</p>
-        <a href="${item.link}" target="_blank">Full bulletin</a>
+        <a href="${item.link}" target="_blank" rel="noopener noreferrer">Full bulletin</a>
       `;
       container.appendChild(div);
     });
