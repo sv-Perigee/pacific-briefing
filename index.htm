@@ -233,7 +233,7 @@ setInterval(loadBannerAlert, 5 * 60 * 1000);
   <h1> All-on-One Page - Daily Weather Briefing <br> Western South Pacific </h1>
   <p style="text-align: center;">
     This webpage was created by David, ex-svPerigee<br>
-    Beta v0.321 | Sat 06-Sep'25<br>
+    Beta v0.325 | Sat 06-Sep'25<br>
     Comments & queries, requests & corrections please to
     <a href="mailto:svperigee@gmail.com">svperigee@gmail.com</a>.
   </p>
@@ -762,72 +762,114 @@ setInterval(loadTsunamiAlerts, 5 * 60 * 1000);
 </p>
 
 
-  <!-- === Floating ToC widget code starts here === -->
-  <div id="menu-button">☰</div>
 
-  <nav id="toc-panel">
-    <div id="toc-header">
-      <h3 style="margin:0;">Contents</h3>
-    </div>
-    <ul id="toc-list"></ul>
-  </nav>
 
-  <style>
-    html { scroll-behavior: smooth; }
+<!-- === Floating ToC widget code starts here === -->
+<div id="menu-button">☰</div>
 
-    #menu-button {
-      position: fixed;
-      top: 15px;
-      right: 15px;  /* moved to top right */
-      background: #007bff;
-      color: white;
-      font-size: 22px;
-      padding: 8px 12px;
-      border-radius: 6px;
-      cursor: pointer;
-      z-index: 10000;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
-    }
+<!-- Overlay -->
+<div id="toc-overlay"></div>
 
-    #toc-panel {
-      position: fixed;
-      top: 0; right: 0;  /* slide in from right */
-      width: 280px;
-      height: 100%;
-      background: white;
-      box-shadow: -2px 0 5px rgba(0,0,0,0.3);
-      transform: translateX(100%);
-      transition: transform 0.3s ease;
-      z-index: 9999;
-      padding: 10px;
-      overflow-y: auto;
-    }
+<nav id="toc-panel">
+  <div id="toc-header">
+    <h3>Contents</h3>
+  </div>
+  <ul id="toc-list"></ul>
+</nav>
 
-    #toc-panel.open { transform: translateX(0); }
+<style>
+  html { scroll-behavior: smooth; }
 
-    #toc-header {
-      border-bottom: 1px solid #ccc;
-      padding-bottom: 6px;
-      margin-bottom: 10px;
-    }
+  /* Hamburger button */
+  #menu-button {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    background: #007bff;
+    color: #fff;
+    font-size: 22px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    z-index: 10000;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  }
+  #menu-button:hover {
+    background: #0056b3;
+  }
 
-    #toc-list { list-style: none; padding: 0; }
-    #toc-list li { margin: 6px 0; }
-    #toc-list a {
-      text-decoration: none;
-      color: #007bff;
-      padding: 3px 6px;
-      display: block;
-      border-radius: 4px;
-    }
-    #toc-list a:hover { background: #e6f0ff; }
-    #toc-list a.active {
-      background: #007bff;
-      color: white;
-      font-weight: bold;
-    }
-  </style>
+  /* Overlay */
+  #toc-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.4);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+    z-index: 9998;
+  }
+  #toc-overlay.open {
+    opacity: 1;
+    visibility: visible;
+  }
 
+  /* Slide-in panel */
+  #toc-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 260px;
+    height: 100%;
+    background: #fff;
+    box-shadow: -2px 0 5px rgba(0,0,0,0.3);
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    z-index: 9999;
+    padding: 12px;
+    overflow-y: auto;
+  }
+  #toc-panel.open { transform: translateX(0); }
+
+  /* Panel header */
+  #toc-header {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 6px;
+    margin-bottom: 10px;
+  }
+  #toc-header h3 {
+    margin: 0;
+    font-size: 1.1em;
+  }
+
+  /* ToC list */
+  #toc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  #toc-list li {
+    margin: 6px 0;
+  }
+  #toc-list a {
+    text-decoration: none;
+    color: #007bff;
+    padding: 3px 6px;
+    display: block;
+    border-radius: 4px;
+    transition: background 0.2s;
+  }
+  #toc-list a:hover {
+    background: #e6f0ff;
+  }
+  #toc-list a.active {
+    background: #007bff;
+    color: #fff;
+    font-weight: bold;
+  }
+</style>
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
@@ -845,15 +887,33 @@ setInterval(loadTsunamiAlerts, 5 * 60 * 1000);
 
     const menuBtn = document.getElementById("menu-button");
     const tocPanel = document.getElementById("toc-panel");
-    const tocLinks = document.querySelectorAll("#toc-list a");
+    const tocOverlay = document.getElementById("toc-overlay");
 
     // Toggle open/close
-    menuBtn.addEventListener("click", () => {
-      tocPanel.classList.toggle("open");
+    function toggleToc(forceClose = false) {
+      if (forceClose) {
+        tocPanel.classList.remove("open");
+        tocOverlay.classList.remove("open");
+      } else {
+        tocPanel.classList.toggle("open");
+        tocOverlay.classList.toggle("open");
+      }
+    }
+
+    menuBtn.addEventListener("click", () => toggleToc());
+    tocOverlay.addEventListener("click", () => toggleToc(true));
+
+    // Close ToC when clicking a link (good for mobile)
+    document.addEventListener("click", e => {
+      if (e.target.closest("#toc-list a")) {
+        toggleToc(true);
+      }
     });
 
     // ScrollSpy highlight (H2 only)
     const sections = Array.from(document.querySelectorAll("h2"));
+    const tocLinks = () => document.querySelectorAll("#toc-list a");
+
     window.addEventListener("scroll", () => {
       let current = sections[0];
       sections.forEach(sec => {
@@ -862,7 +922,7 @@ setInterval(loadTsunamiAlerts, 5 * 60 * 1000);
         }
       });
 
-      tocLinks.forEach(link => {
+      tocLinks().forEach(link => {
         link.classList.remove("active");
         if (link.getAttribute("href") === "#" + current.id) {
           link.classList.add("active");
@@ -871,8 +931,8 @@ setInterval(loadTsunamiAlerts, 5 * 60 * 1000);
     });
   });
 </script>
+<!-- === Floating ToC widget code ends here === -->
 
-  <!-- === Floating ToC widget code ends here === -->
 
 </body>
 </html>
