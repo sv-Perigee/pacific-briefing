@@ -233,7 +233,7 @@ setInterval(loadBannerAlert, 5 * 60 * 1000);
   <h1> All-on-One Page - Daily Weather Briefing <br> Western South Pacific </h1>
   <p style="text-align: center;">
     This webpage was created by David, ex-svPerigee<br>
-    Beta v0.205 | Sat 06-Sep'25<br>
+    Beta v0.321 | Sat 06-Sep'25<br>
     Comments & queries, requests & corrections please to
     <a href="mailto:svperigee@gmail.com">svperigee@gmail.com</a>.
   </p>
@@ -254,7 +254,7 @@ setInterval(loadBannerAlert, 5 * 60 * 1000);
 
   <hr>
 
-  <!-- MSLP Charts - Tropcial Pacific-->
+  <!-- MSLP Charts - Tropical Pacific-->
   <section id="MSL-Charts">
     <h2>MSL Charts - Tropical Pacific</h2>
     <div class="gallery">
@@ -828,49 +828,50 @@ setInterval(loadTsunamiAlerts, 5 * 60 * 1000);
     }
   </style>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const tocList = document.getElementById("toc-list");
 
-      // Build ToC from H2 + H3
-      document.querySelectorAll("h2, h3").forEach(el => {
-        if (!el.id) {
-          el.id = el.textContent.toLowerCase().replace(/\s+/g,"-");
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const tocList = document.getElementById("toc-list");
+
+    // Build ToC from H2 only
+    document.querySelectorAll("h2").forEach(el => {
+      if (!el.id) {
+        el.id = el.textContent.toLowerCase().replace(/\s+/g, "-");
+      }
+      const li = document.createElement("li");
+      li.innerHTML = `<a href="#${el.id}">${el.textContent}</a>`;
+      tocList.appendChild(li);
+    });
+
+    const menuBtn = document.getElementById("menu-button");
+    const tocPanel = document.getElementById("toc-panel");
+    const tocLinks = document.querySelectorAll("#toc-list a");
+
+    // Toggle open/close
+    menuBtn.addEventListener("click", () => {
+      tocPanel.classList.toggle("open");
+    });
+
+    // ScrollSpy highlight (H2 only)
+    const sections = Array.from(document.querySelectorAll("h2"));
+    window.addEventListener("scroll", () => {
+      let current = sections[0];
+      sections.forEach(sec => {
+        if (sec.getBoundingClientRect().top < 120) {
+          current = sec;
         }
-        const li = document.createElement("li");
-        li.style.marginLeft = el.tagName === "H3" ? "15px" : "0";
-        li.innerHTML = `<a href="#${el.id}">${el.textContent}</a>`;
-        tocList.appendChild(li);
       });
 
-      const menuBtn = document.getElementById("menu-button");
-      const tocPanel = document.getElementById("toc-panel");
-      const tocLinks = document.querySelectorAll("#toc-list a");
-
-      // Toggle open/close
-      menuBtn.addEventListener("click", () => {
-        tocPanel.classList.toggle("open");
-      });
-
-      // ScrollSpy highlight
-      const sections = Array.from(document.querySelectorAll("h2, h3"));
-      window.addEventListener("scroll", () => {
-        let current = sections[0];
-        sections.forEach(sec => {
-          if (sec.getBoundingClientRect().top < 120) {
-            current = sec;
-          }
-        });
-
-        tocLinks.forEach(link => {
-          link.classList.remove("active");
-          if (link.getAttribute("href") === "#" + current.id) {
-            link.classList.add("active");
-          }
-        });
+      tocLinks.forEach(link => {
+        link.classList.remove("active");
+        if (link.getAttribute("href") === "#" + current.id) {
+          link.classList.add("active");
+        }
       });
     });
-  </script>
+  });
+</script>
+
   <!-- === Floating ToC widget code ends here === -->
 
 </body>
