@@ -232,8 +232,8 @@ setInterval(loadBannerAlert, 5 * 60 * 1000);
 
   <h1> All-on-One Page - Daily Weather Briefing <br> Western South Pacific </h1>
   <p style="text-align: center;">
-    This webpage was created by David, ex-svPerigee<br>
-    Beta v0.325 | Sat 06-Sep'25<br>
+    This webpage was made by Dave<br>
+    Beta v0.475 | Wed 05-Nov'25<br>
     Comments & queries, requests & corrections please to
     <a href="mailto:svperigee@gmail.com">svperigee@gmail.com</a>.
   </p>
@@ -585,32 +585,6 @@ setInterval(loadBannerAlert, 5 * 60 * 1000);
 
   <hr>
 
-  <!-- Wind/Wave Forecasts -->
-  <section id="wind-waves">
-    <h2>Wind-Wave Forecasts - Tropical Pacific</h2>
-    <h3>US NOAA</h3>
-    <div class="gallery">
-      <div class="gallery-item">
-        <img src="https://tgftp.nws.noaa.gov/fax/PJFB10.gif" alt="Latest Wind/Waves" loading="lazy">
-        <div class="description">Latest Wind/Waves</div>
-      </div>
-      <div class="gallery-item">
-        <img src="https://tgftp.nws.noaa.gov/fax/PWFE11.gif" alt="Wind-Wave Forecast +24HRs" loading="lazy">
-        <div class="description">Wind-Wave Forecast +24HRs</div>
-      </div>
-      <div class="gallery-item">
-        <img src="https://tgftp.nws.noaa.gov/fax/PJFI10.gif" alt="Wind-Wave Forecast +48HRs" loading="lazy">
-        <div class="description">Wind-Wave Forecast +48HRs</div>
-      </div>
-      <div class="gallery-item">
-        <img src="https://tgftp.nws.noaa.gov/fax/PJFK10.gif" alt="Wind-Wave Forecast +72HRs" loading="lazy">
-        <div class="description">Wind-Wave Forecast +72HRs</div>
-      </div>
-    </div>
-  </section>
-
-  <hr>
-
   <!-- Snapshot Australia -->
   <section id="snapshot-aus">
     <h2>Looking West - Snapshot Australia</h2>
@@ -719,6 +693,7 @@ async function loadTsunamiAlerts() {
 }
 loadTsunamiAlerts();
 setInterval(loadTsunamiAlerts, 5 * 60 * 1000);
+
 </script>
 
 <h2 id="help" style="text-align: center;">Help</h2>
@@ -730,10 +705,10 @@ setInterval(loadTsunamiAlerts, 5 * 60 * 1000);
   <a href="mailto:svperigee@gmail.com">svperigee@gmail.com</a>.
 </p>
 
+<h2 id="Change-Log" style="text-align: center;">Change-Log</h2>
 <p style="text-align: center;">
-  <a href="#top">Back to Top ↑</a>
+v0.475 Removed (NOAA) Wind-Wave charts - no longer being updated since May'25<br>
 </p>
-
 
   <!-- TOC (keep plain, at bottom) -->
   <h2>Table of Contents</h2>
@@ -748,7 +723,6 @@ setInterval(loadTsunamiAlerts, 5 * 60 * 1000);
     <li><a href="#bulletins">Text-based Weather Bulletins</a></li>
     <li><a href="#regional-satpics">Regional SatPICs</a></li>
     <li><a href="#ascat">Latest ASCAT Satellite Winds</a></li>
-    <li><a href="#wind-waves">Wind-Wave Forecasts - Tropical Pacific</a></li>
     <li><a href="#snapshot-aus">Looking West – Snapshot Australia</a></li>
     <li><a href="#mslp-forecast">5-day MSLP Synoptic Forecast - Australia</a></li>
     <li><a href="#synoptic-charts">Marine Synoptic Charts – South Pacific</a></li>
